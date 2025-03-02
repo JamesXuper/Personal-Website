@@ -134,8 +134,8 @@ header {
     padding: 2rem 0;
     background-color: var(--card-background);
     box-shadow: 0 1px 3px var(--shadow-color);
-    position: sticky;
-    top: 0;
+    /* position: sticky;
+    top: 0; */
     z-index: 10;
 }
 
@@ -480,4 +480,43 @@ footer {
     .theme-switch-wrapper {
         margin-left: 0;
     }
+}
+
+/* Custom cursor styles */
+body {
+    cursor: none; /* Hide the default cursor */
+}
+
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    mix-blend-mode: difference;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s;
+    z-index: 9999;
+}
+
+.custom-cursor-follower {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: 0.1s;
+    z-index: 9998;
+    opacity: 0.5;
+}
+
+/* Hover effect for links and buttons */
+a:hover ~ .custom-cursor,
+button:hover ~ .custom-cursor {
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-color-hover);
 }
