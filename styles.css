@@ -508,3 +508,13 @@ footer {
         margin-left: 0;
     }
 }
+
+/* Social icon styling */
+.social-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.social-link:hover .social-icon {
+    stroke: white;
+}
