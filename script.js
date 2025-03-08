@@ -84,7 +84,7 @@ function setupTypingAnimation() {
         // If we've typed the full word
         else if (!isDeleting && text.length === currentTitle.length) {
             // Pause at the full word
-            typingSpeed = 3000;
+            typingSpeed = 2000;
             // Schedule deletion after pause
             setTimeout(() => {
                 isDeleting = true;
