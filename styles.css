@@ -240,6 +240,18 @@ h1 {
 }
 
 /* Typing animation styles */
+.typing-container {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    min-height: 2.2rem;
+}
+
+#typing-text {
+    display: inline-block;
+}
+
 .typing-cursor {
     display: inline-block;
     opacity: 1;

@@ -78,46 +78,60 @@ function setupCustomCursor() {
  */
 function setupTypingAnimation() {
     const typingElement = document.getElementById('typing-text');
-    const phrases = [
-        'Data analyst',
+    if (!typingElement) return;
+
+    const titles = [
+        'Data Analyst',
         'Teacher',
-        'Python enthusiast',
-        'Data visualizer'
+        'Python Enthusiast',
+        'Data Visualizer'
     ];
     
-    let phraseIndex = 0;
+    let titleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    let typingSpeed = 100; // Base typing speed in ms
+    let isPaused = false;
     
-    function typeText() {
-        const currentPhrase = phrases[phraseIndex];
+    function type() {
+        const currentTitle = titles[titleIndex];
         
-        // Set typing speed based on state
-        if (isDeleting) {
-            typingSpeed = 50; // Faster when deleting
+        // Determine typing speed based on current state
+        let typingSpeed;
+        
+        if (isPaused) {
+            typingSpeed = 1500; // Pause at complete title
+            isPaused = false;
+        } else if (isDeleting) {
+            typingSpeed = 50; // Delete faster
         } else {
-            // Slower when typing, random variation for realism
-            typingSpeed = 100 + Math.random() * 50;
+            typingSpeed = 150; // Type at moderate speed
         }
         
-        // If deleting
+        // Typing or deleting text
         if (isDeleting) {
-            // Remove a character
-            typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+            typingElement.textContent = currentTitle.substring(0, charIndex - 1);
             charIndex--;
         } else {
-            // Add a character
-            typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+            typingElement.textContent = currentTitle.substring(0, charIndex + 1);
             charIndex++;
         }
         
-        // If finished typing the phrase
-        if (!isDeleting && charIndex === currentPhrase.length) {
-            // Pause at the end of typing
-            typingSpeed = 1500; // Pause 1.5s at full text
+        // Logic for switching states
+        if (!isDeleting && charIndex === currentTitle.length) {
+            // Finished typing the full title
+            isPaused = true;
             isDeleting = true;
-        } 
-        // If finished deleting the phrase
-        else if (isDeleting && charIndex === 0) {
-            isDeleting = false
+        } else if (isDeleting && charIndex === 0) {
+            // Finished deleting the title
+            isDeleting = false;
+            // Move to next title
+            titleIndex = (titleIndex + 1) % titles.length;
+        }
+        
+        // Schedule the next update
+        setTimeout(type, typingSpeed);
+    }
+    
+    // Start the typing animation
+    setTimeout(type, 1000);
+}
