@@ -54,7 +54,7 @@ function setupTypingAnimation() {
         let typingSpeed;
         
         if (isPaused) {
-            typingSpeed = 3000; // Pause at complete title
+            typingSpeed = 3000; // Pause at complete title for 3 seconds
             isPaused = false;
         } else if (isDeleting) {
             typingSpeed = 50; // Delete faster
@@ -73,9 +73,9 @@ function setupTypingAnimation() {
         
         // Logic for switching states
         if (!isDeleting && charIndex === currentTitle.length) {
-            // Finished typing the full title
+            // Finished typing the full title - pause before deleting
             isPaused = true;
-            isDeleting = true;
+            // Don't set isDeleting yet - wait for the pause to finish
         } else if (isDeleting && charIndex === 0) {
             // Finished deleting the title
             isDeleting = false;
@@ -84,7 +84,13 @@ function setupTypingAnimation() {
         }
         
         // Schedule the next update
-        setTimeout(type, typingSpeed);
+        setTimeout(() => {
+            // After pause, start deleting
+            if (isPaused === false && !isDeleting && charIndex === currentTitle.length) {
+                isDeleting = true;
+            }
+            type();
+        }, typingSpeed);
     }
     
     // Start the typing animation
