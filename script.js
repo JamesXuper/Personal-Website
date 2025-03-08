@@ -2,9 +2,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Theme switching functionality
     setupThemeSwitcher();
     
-    // Custom cursor effect
-    setupCustomCursor();
-    
     // Text typing animation
     setupTypingAnimation();
 });
@@ -29,49 +26,7 @@ function setupThemeSwitcher() {
     });
 }
 
-/**
- * Custom cursor effect
- */
-function setupCustomCursor() {
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    const cursorFollower = document.createElement('div');
-    cursorFollower.classList.add('custom-cursor-follower');
-    
-    // Add to DOM
-    document.body.appendChild(cursor);
-    document.body.appendChild(cursorFollower);
-    
-    // Update cursor position on mouse move
-    document.addEventListener('mousemove', function(e) {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-        
-        // Follower with slight delay
-        setTimeout(function() {
-            cursorFollower.style.left = e.clientX + 'px';
-            cursorFollower.style.top = e.clientY + 'px';
-        }, 80);
-    });
-    
-    // Add hover effect for links and buttons
-    const links = document.querySelectorAll('a, button');
-    links.forEach(link => {
-        link.addEventListener('mouseenter', function() {
-            cursor.style.width = '30px';
-            cursor.style.height = '30px';
-            cursorFollower.style.width = '45px';
-            cursorFollower.style.height = '45px';
-        });
-        
-        link.addEventListener('mouseleave', function() {
-            cursor.style.width = '20px';
-            cursor.style.height = '20px';
-            cursorFollower.style.width = '40px';
-            cursorFollower.style.height = '40px';
-        });
-    });
-}
+// Custom cursor effect removed
 
 /**
  * Text typing animation
