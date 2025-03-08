@@ -54,6 +54,14 @@ function setupTypingAnimation() {
             isDeleting = false;
             currentTitleIndex = (currentTitleIndex + 1) % titles.length;
             charIndex = 0;
+            
+            // Add a non-breaking space to prevent layout shift when empty
+            typingElement.innerHTML = '&nbsp;';
+            setTimeout(() => {
+                typingElement.textContent = '';
+                tick();
+            }, 50);
+            return;
         }
         
         // Handle typing or deleting

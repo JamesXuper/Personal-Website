@@ -198,6 +198,7 @@ h1 {
     margin-bottom: 1.5rem;
     color: var(--text-color-headings);
     position: relative;
+    min-height: 4.2rem; /* Prevent layout shift */
 }
 
 h1::after {
