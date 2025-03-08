@@ -33,6 +33,7 @@ function setupTypingAnimation() {
     const typingElement = document.getElementById('typing-text');
     if (!typingElement) return;
 
+    // Find the longest title to set consistent width
     const titles = [
         'James Xu',
         'Data Analyst',
@@ -40,54 +41,63 @@ function setupTypingAnimation() {
         'Python Enthusiast'
     ];
     
+    // Set initial conditions
     let currentTitleIndex = 0;
     let isDeleting = false;
     let text = 'James Xu';
-    let charIndex = text.length;
+    
+    // Calculate minimum width based on longest title and set it
+    const longestTitle = titles.reduce((a, b) => a.length > b.length ? a : b);
+    typingElement.style.minWidth = longestTitle.length + 'ch';
     
     function tick() {
         const currentTitle = titles[currentTitleIndex];
-        const fullLength = currentTitle.length;
-        
-        // Check if we're done deleting current word
-        if (isDeleting && text.length === 0) {
-            isDeleting = false;
-            currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-            charIndex = 0;
-            
-            // Add a non-breaking space to prevent layout shift when empty
-            typingElement.innerHTML = '&nbsp;';
-            setTimeout(() => {
-                typingElement.textContent = '';
-                tick();
-            }, 50);
-            return;
-        }
         
         // Handle typing or deleting
         if (isDeleting) {
             // Remove a character
-            text = currentTitle.substring(0, text.length - 1);
-            typingElement.textContent = text;
-            setTimeout(tick, 80); // Deletion speed
+            text = text.slice(0, -1);
         } else {
-            // Add a character
-            text = currentTitle.substring(0, charIndex + 1);
-            typingElement.textContent = text;
-            charIndex++;
-            
-            // Check if we've completed typing the word
-            if (text.length === fullLength) {
-                // Pause at the completed word before starting to delete
-                setTimeout(() => {
-                    isDeleting = true;
-                    tick();
-                }, 3000); // 3 second pause when word is complete
-            } else {
-                // Continue typing
-                setTimeout(tick, 150);
+            // Add a character until we reach the full title
+            const nextChar = currentTitle.charAt(text.length);
+            if (text.length < currentTitle.length) {
+                text += nextChar;
             }
         }
+        
+        // Always keep content in the element to prevent layout shift
+        if (text.length === 0) {
+            typingElement.innerHTML = '&nbsp;';
+        } else {
+            typingElement.textContent = text;
+        }
+        
+        // Determine next state and timing
+        let typingSpeed = 150;
+        
+        // If we've deleted everything
+        if (isDeleting && text.length === 0) {
+            isDeleting = false;
+            currentTitleIndex = (currentTitleIndex + 1) % titles.length;
+            typingSpeed = 500; // Pause briefly before typing next word
+        } 
+        // If we've typed the full word
+        else if (!isDeleting && text.length === currentTitle.length) {
+            // Pause at the full word
+            typingSpeed = 3000;
+            // Schedule deletion after pause
+            setTimeout(() => {
+                isDeleting = true;
+                tick();
+            }, typingSpeed);
+            return;
+        }
+        // Faster deletion speed
+        else if (isDeleting) {
+            typingSpeed = 80;
+        }
+        
+        setTimeout(tick, typingSpeed);
     }
     
     // Start with a pause before beginning the animation

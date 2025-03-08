@@ -198,14 +198,23 @@ h1 {
     margin-bottom: 1.5rem;
     color: var(--text-color-headings);
     position: relative;
-    min-height: 4.2rem; /* Prevent layout shift */
+    min-height: 4.2rem; /* Prevent vertical layout shift */
+    width: 100%; /* Full width container */
+}
+
+/* Container for the typing text to prevent horizontal shifts */
+#typing-text {
+    display: inline-block;
+    min-width: 12ch; /* Adjust based on your longest title */
+    text-align: left;
 }
 
 h1::after {
     content: '|';
-    position: absolute;
+    display: inline-block;
     color: var(--primary-color);
     animation: blink 0.7s infinite;
+    margin-left: 2px;
 }
 
 @keyframes blink {
