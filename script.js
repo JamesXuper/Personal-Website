@@ -26,10 +26,8 @@ function setupThemeSwitcher() {
     });
 }
 
-// Custom cursor effect removed
-
 /**
- * Text typing animation
+ * Text typing animation with simplified approach
  */
 function setupTypingAnimation() {
     const typingElement = document.getElementById('typing-text');
@@ -38,63 +36,52 @@ function setupTypingAnimation() {
     const titles = [
         'Data Analyst',
         'Teacher',
-        'Lifelong student'
+        'Python Enthusiast',
+        'Data Visualizer'
     ];
     
-    let titleIndex = 0;
-    let charIndex = 0;
+    let currentTitleIndex = 0;
     let isDeleting = false;
-    let isPaused = false;
+    let text = '';
+    let charIndex = 0;
     
-    function typeNextChar() {
-        const currentTitle = titles[titleIndex];
+    function tick() {
+        const currentTitle = titles[currentTitleIndex];
+        const fullLength = currentTitle.length;
         
-        // Determine typing speed based on current state
-        let typingSpeed;
-        
-        if (isPaused) {
-            // Pause at complete title for 3 seconds
-            typingSpeed = 3000;
-        } else if (isDeleting) {
-            // Delete faster
-            typingSpeed = 50;
-        } else {
-            // Type at moderate speed
-            typingSpeed = 150;
-        }
-        
-        // Update the text based on current state
-        if (isDeleting) {
-            typingElement.textContent = currentTitle.substring(0, charIndex);
-            charIndex--;
-        } else if (!isPaused) {
-            typingElement.textContent = currentTitle.substring(0, charIndex + 1);
-            charIndex++;
-        }
-        
-        // Check state transitions
-        if (!isDeleting && !isPaused && charIndex === currentTitle.length) {
-            // Finished typing the full title - pause now
-            isPaused = true;
-            setTimeout(() => {
-                isPaused = false;
-                isDeleting = true;
-                typeNextChar();
-            }, typingSpeed);
-            return;
-        } else if (isDeleting && charIndex < 0) {
-            // Finished deleting, move to next title
+        // Check if we're done deleting current word
+        if (isDeleting && text.length === 0) {
             isDeleting = false;
-            titleIndex = (titleIndex + 1) % titles.length;
+            currentTitleIndex = (currentTitleIndex + 1) % titles.length;
             charIndex = 0;
         }
         
-        // Schedule the next update if not paused
-        if (!isPaused) {
-            setTimeout(typeNextChar, typingSpeed);
+        // Handle typing or deleting
+        if (isDeleting) {
+            // Remove a character
+            text = currentTitle.substring(0, text.length - 1);
+            typingElement.textContent = text;
+            setTimeout(tick, 50); // Faster deletion speed
+        } else {
+            // Add a character
+            text = currentTitle.substring(0, charIndex + 1);
+            typingElement.textContent = text;
+            charIndex++;
+            
+            // Check if we've completed typing the word
+            if (text.length === fullLength) {
+                // Pause at the completed word before starting to delete
+                setTimeout(() => {
+                    isDeleting = true;
+                    tick();
+                }, 3000); // 3 second pause when word is complete
+            } else {
+                // Continue typing
+                setTimeout(tick, 150);
+            }
         }
     }
     
-    // Start the typing animation
-    typeNextChar();
+    // Start the animation
+    tick();
 }
