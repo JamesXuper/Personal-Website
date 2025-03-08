@@ -36,9 +36,9 @@ function setupTypingAnimation() {
     // Find the longest title to set consistent width
     const titles = [
         'James Xu',
-        'A Data Analyst',
-        'A Teacher',
-        'A Lakers Fan'
+        'Data Analyst',
+        'Teacher',
+        'Lifelong student'
     ];
     
     // Set initial conditions
