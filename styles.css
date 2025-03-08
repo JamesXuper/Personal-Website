@@ -446,6 +446,16 @@ h1 {
     color: white;
 }
 
+/* Social icon styling */
+.social-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.social-link:hover .social-icon {
+    stroke: white;
+}
+
 /* Footer */
 footer {
     padding: 2rem 0;
@@ -481,11 +491,12 @@ footer {
 
     .nav-links {
         flex-wrap: wrap;
-        justify-content: flex-end;
+        justify-content: center;
+        gap: 1.5rem;
     }
     
     .theme-switch-wrapper {
-        margin-top: 1rem;
+        margin-left: 0;
     }
 }
 
@@ -495,26 +506,18 @@ footer {
     }
     
     .nav-links {
-        gap: 1rem;
+        width: 100%;
+        justify-content: center;
+        gap: 1.5rem;
     }
     
     nav {
         flex-direction: column;
         align-items: center;
-        gap: 1rem;
+        gap: 1.5rem;
     }
     
     .theme-switch-wrapper {
         margin-left: 0;
     }
-}
-
-/* Social icon styling */
-.social-icon {
-    width: 20px;
-    height: 20px;
-}
-
-.social-link:hover .social-icon {
-    stroke: white;
 }
