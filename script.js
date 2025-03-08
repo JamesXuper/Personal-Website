@@ -38,8 +38,7 @@ function setupTypingAnimation() {
     const titles = [
         'Data Analyst',
         'Teacher',
-        'Python Enthusiast',
-        'Data Visualizer'
+        'Lifelong student'
     ];
     
     let titleIndex = 0;
@@ -47,52 +46,55 @@ function setupTypingAnimation() {
     let isDeleting = false;
     let isPaused = false;
     
-    function type() {
+    function typeNextChar() {
         const currentTitle = titles[titleIndex];
         
         // Determine typing speed based on current state
         let typingSpeed;
         
         if (isPaused) {
-            typingSpeed = 3000; // Pause at complete title for 3 seconds
-            isPaused = false;
+            // Pause at complete title for 3 seconds
+            typingSpeed = 3000;
         } else if (isDeleting) {
-            typingSpeed = 50; // Delete faster
+            // Delete faster
+            typingSpeed = 50;
         } else {
-            typingSpeed = 150; // Type at moderate speed
+            // Type at moderate speed
+            typingSpeed = 150;
         }
         
-        // Typing or deleting text
+        // Update the text based on current state
         if (isDeleting) {
-            typingElement.textContent = currentTitle.substring(0, charIndex - 1);
+            typingElement.textContent = currentTitle.substring(0, charIndex);
             charIndex--;
-        } else {
+        } else if (!isPaused) {
             typingElement.textContent = currentTitle.substring(0, charIndex + 1);
             charIndex++;
         }
         
-        // Logic for switching states
-        if (!isDeleting && charIndex === currentTitle.length) {
-            // Finished typing the full title - pause before deleting
+        // Check state transitions
+        if (!isDeleting && !isPaused && charIndex === currentTitle.length) {
+            // Finished typing the full title - pause now
             isPaused = true;
-            // Don't set isDeleting yet - wait for the pause to finish
-        } else if (isDeleting && charIndex === 0) {
-            // Finished deleting the title
+            setTimeout(() => {
+                isPaused = false;
+                isDeleting = true;
+                typeNextChar();
+            }, typingSpeed);
+            return;
+        } else if (isDeleting && charIndex < 0) {
+            // Finished deleting, move to next title
             isDeleting = false;
-            // Move to next title
             titleIndex = (titleIndex + 1) % titles.length;
+            charIndex = 0;
         }
         
-        // Schedule the next update
-        setTimeout(() => {
-            // After pause, start deleting
-            if (isPaused === false && !isDeleting && charIndex === currentTitle.length) {
-                isDeleting = true;
-            }
-            type();
-        }, typingSpeed);
+        // Schedule the next update if not paused
+        if (!isPaused) {
+            setTimeout(typeNextChar, typingSpeed);
+        }
     }
     
     // Start the typing animation
-    setTimeout(type, 1000);
+    typeNextChar();
 }
