@@ -1,41 +1,38 @@
+/* CSS Variables for Light/Dark Theme */
 :root {
-    /* Light Theme - Lakers Colors */
-    --primary-color: #552583; /* Lakers Purple */
-    --primary-color-hover: #4a1e77;
-    --secondary-color: #b27b00; /* Darker Lakers Gold for better contrast on white */
-    --background-color: #ffffff;
+    /* Light Theme - Default */
+    --primary-color: #0366d6;
+    --primary-color-hover: #0246a2;
+    --background-color: #f9fafb;
     --card-background: #ffffff;
     --text-color: #333333;
     --text-color-secondary: #555555;
-    --text-color-headings: #552583; /* Lakers Purple for headings */
-    --border-color: rgba(85, 37, 131, 0.1); /* Light purple border */
-    --tag-background: #F9F3FF; /* Very light purple */
-    --tag-color: #552583; /* Lakers Purple */
-    --shadow-color: rgba(85, 37, 131, 0.1); /* Light purple shadow */
-    --social-bg: #F9F3FF; /* Very light purple */
+    --text-color-headings: #111111;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --tag-background: #e6f0ff;
+    --tag-color: #0366d6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --social-bg: #f1f5f9;
     --project-image-bg: #edf2f7;
     --project-image-color: #a0aec0;
-    --accent-color: #b27b00; /* Darker Lakers Gold as accent */
 }
 
 [data-theme="dark"] {
-    /* Dark Theme - Lakers Colors */
-    --primary-color: #FDB927; /* Lakers Gold as primary in dark mode */
-    --primary-color-hover: #ffca5a;
-    --secondary-color: #9c71d0; /* Lighter Lakers Purple for better readability */
-    --background-color: #000000; /* Black background */
-    --card-background: #111111;
+    /* Dark Theme */
+    --primary-color: #58a6ff;
+    --primary-color-hover: #79b6ff;
+    --background-color: #0d1117;
+    --card-background: #161b22;
     --text-color: #e6edf3;
-    --text-color-secondary: #b6b6b6;
-    --text-color-headings: #FDB927; /* Lakers Gold for headings */
-    --border-color: rgba(253, 185, 39, 0.2); /* Gold border */
-    --tag-background: #2D2D2D; /* Dark gray */
-    --tag-color: #FDB927; /* Lakers Gold */
+    --text-color-secondary: #8b949e;
+    --text-color-headings: #f0f6fc;
+    --border-color: rgba(240, 246, 252, 0.1);
+    --tag-background: #1f2937;
+    --tag-color: #58a6ff;
     --shadow-color: rgba(0, 0, 0, 0.5);
-    --social-bg: #2D2D2D; /* Dark gray */
-    --project-image-bg: #2D2D2D;
+    --social-bg: #21262d;
+    --project-image-bg: #21262d;
     --project-image-color: #8b949e;
-    --accent-color: #9c71d0; /* Lighter Lakers Purple as accent in dark mode */
 }
 
 /* Reset and base styles */
@@ -160,15 +157,6 @@ nav {
     color: var(--primary-color);
 }
 
-[data-theme="dark"] .btn-secondary {
-    font-weight: 700;
-    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5); /* Add text shadow in dark mode */
-}
-
-[data-theme="dark"] .greeting {
-    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7); /* Stronger shadow for purple in dark mode */
-}
-
 /* Hero Section */
 .hero {
     padding: 6rem 0;
@@ -197,10 +185,9 @@ nav {
 
 .greeting {
     font-size: 1.2rem;
-    color: var(--secondary-color);
-    font-weight: 700;
+    color: var(--primary-color);
+    font-weight: 600;
     margin-bottom: 1rem;
-    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 h1 {
@@ -213,17 +200,10 @@ h1 {
     width: 100%; /* Full width container */
 }
 
-/* Container for the typing text to prevent horizontal shifts */
-#typing-text {
-    display: inline-block;
-    min-width: 12ch; /* Adjust based on your longest title */
-    text-align: left;
-}
-
 h1::after {
     content: '|';
     display: inline-block;
-    color: var(--primary-color); /* Use primary color instead of secondary */
+    color: var(--primary-color);
     animation: blink 0.7s infinite;
     margin-left: 2px;
 }
@@ -233,14 +213,18 @@ h1::after {
     50% { opacity: 0; }
 }
 
+/* Container for the typing text to prevent horizontal shifts */
+#typing-text {
+    display: inline-block;
+    min-width: 12ch; /* Adjust based on your longest title */
+    text-align: left;
+}
+
 .hero-description {
     font-size: 1.25rem;
     color: var(--text-color-secondary);
     margin-bottom: 2rem;
 }
-
-/* Typing animation styles */
-/* Removed the separate typing container styles */
 
 .cta-buttons {
     display: flex;
@@ -268,30 +252,19 @@ h1::after {
 }
 
 .btn-secondary {
-    border: 2px solid var(--secondary-color);
-    color: var(--secondary-color);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
     background-color: transparent;
-    font-weight: 700; /* Make text bolder for better contrast */
 }
 
 .btn-secondary:hover {
-    background-color: rgba(178, 123, 0, 0.1); /* Darker gold with transparency */
+    background-color: rgba(3, 102, 214, 0.1);
 }
 
 /* Featured Projects */
 .featured-projects {
     padding: 5rem 0;
     background-color: var(--card-background);
-    border-top: 4px solid var(--secondary-color);
-    border-bottom: 4px solid var(--secondary-color);
-}
-
-/* Add box for the typing animation text to improve readability */
-#typing-text {
-    display: inline-block;
-    min-width: 12ch;
-    text-align: left;
-    position: relative;
 }
 
 .section-title {
@@ -313,13 +286,11 @@ h1::after {
     overflow: hidden;
     box-shadow: 0 4px 6px var(--shadow-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-left: 3px solid var(--primary-color);
 }
 
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 15px var(--shadow-color);
-    border-left: 3px solid var(--secondary-color);
 }
 
 .project-image {
@@ -362,7 +333,7 @@ h1::after {
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.8rem;
-    font-weight: 700; /* Bolder text for better readability */
+    font-weight: 500;
 }
 
 .project-link {
@@ -419,7 +390,6 @@ h1::after {
 .contact {
     padding: 5rem 0;
     background-color: var(--card-background);
-    border-top: 4px solid var(--secondary-color);
 }
 
 .contact-content {
@@ -459,8 +429,8 @@ h1::after {
 }
 
 .social-link:hover {
-    background-color: var(--secondary-color);
-    color: var(--card-background);
+    background-color: var(--primary-color);
+    color: white;
 }
 
 /* Social icon styling */
