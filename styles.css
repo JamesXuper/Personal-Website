@@ -1,38 +1,42 @@
 /* CSS Variables for Light/Dark Theme */
 :root {
-    /* Light Theme - Default */
-    --primary-color: #0366d6;
-    --primary-color-hover: #0246a2;
-    --background-color: #f9fafb;
+    /* Light Theme - Lakers Colors */
+    --primary-color: #552583; /* Lakers Purple */
+    --primary-color-hover: #4a1e77;
+    --secondary-color: #FDB927; /* Lakers Gold */
+    --background-color: #ffffff;
     --card-background: #ffffff;
     --text-color: #333333;
     --text-color-secondary: #555555;
-    --text-color-headings: #111111;
-    --border-color: rgba(0, 0, 0, 0.1);
-    --tag-background: #e6f0ff;
-    --tag-color: #0366d6;
-    --shadow-color: rgba(0, 0, 0, 0.1);
-    --social-bg: #f1f5f9;
+    --text-color-headings: #552583; /* Lakers Purple for headings */
+    --border-color: rgba(85, 37, 131, 0.1); /* Light purple border */
+    --tag-background: #F9F3FF; /* Very light purple */
+    --tag-color: #552583; /* Lakers Purple */
+    --shadow-color: rgba(85, 37, 131, 0.1); /* Light purple shadow */
+    --social-bg: #F9F3FF; /* Very light purple */
     --project-image-bg: #edf2f7;
     --project-image-color: #a0aec0;
+    --accent-color: #FDB927; /* Lakers Gold as accent */
 }
 
 [data-theme="dark"] {
-    /* Dark Theme */
-    --primary-color: #58a6ff;
-    --primary-color-hover: #79b6ff;
-    --background-color: #0d1117;
-    --card-background: #161b22;
+    /* Dark Theme - Lakers Colors */
+    --primary-color: #FDB927; /* Lakers Gold as primary in dark mode */
+    --primary-color-hover: #ffca5a;
+    --secondary-color: #552583; /* Lakers Purple as secondary */
+    --background-color: #000000; /* Black background */
+    --card-background: #111111;
     --text-color: #e6edf3;
-    --text-color-secondary: #8b949e;
-    --text-color-headings: #f0f6fc;
-    --border-color: rgba(240, 246, 252, 0.1);
-    --tag-background: #1f2937;
-    --tag-color: #58a6ff;
+    --text-color-secondary: #b6b6b6;
+    --text-color-headings: #FDB927; /* Lakers Gold for headings */
+    --border-color: rgba(253, 185, 39, 0.2); /* Gold border */
+    --tag-background: #2D2D2D; /* Dark gray */
+    --tag-color: #FDB927; /* Lakers Gold */
     --shadow-color: rgba(0, 0, 0, 0.5);
-    --social-bg: #21262d;
-    --project-image-bg: #21262d;
+    --social-bg: #2D2D2D; /* Dark gray */
+    --project-image-bg: #2D2D2D;
     --project-image-color: #8b949e;
+    --accent-color: #552583; /* Lakers Purple as accent in dark mode */
 }
 
 /* Reset and base styles */
@@ -187,7 +191,7 @@ nav {
 
 .greeting {
     font-size: 1.2rem;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     font-weight: 600;
     margin-bottom: 1rem;
 }
@@ -212,7 +216,7 @@ h1 {
 h1::after {
     content: '|';
     display: inline-block;
-    color: var(--primary-color);
+    color: var(--secondary-color);
     animation: blink 0.7s infinite;
     margin-left: 2px;
 }
@@ -257,19 +261,21 @@ h1::after {
 }
 
 .btn-secondary {
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
     background-color: transparent;
 }
 
 .btn-secondary:hover {
-    background-color: rgba(3, 102, 214, 0.1);
+    background-color: rgba(253, 185, 39, 0.1);
 }
 
 /* Featured Projects */
 .featured-projects {
     padding: 5rem 0;
     background-color: var(--card-background);
+    border-top: 4px solid var(--secondary-color);
+    border-bottom: 4px solid var(--secondary-color);
 }
 
 .section-title {
@@ -291,11 +297,13 @@ h1::after {
     overflow: hidden;
     box-shadow: 0 4px 6px var(--shadow-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 3px solid var(--primary-color);
 }
 
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 15px var(--shadow-color);
+    border-left: 3px solid var(--secondary-color);
 }
 
 .project-image {
@@ -395,6 +403,7 @@ h1::after {
 .contact {
     padding: 5rem 0;
     background-color: var(--card-background);
+    border-top: 4px solid var(--secondary-color);
 }
 
 .contact-content {
@@ -434,8 +443,8 @@ h1::after {
 }
 
 .social-link:hover {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--secondary-color);
+    color: var(--card-background);
 }
 
 /* Social icon styling */
