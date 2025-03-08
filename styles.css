@@ -197,6 +197,19 @@ h1 {
     line-height: 1.2;
     margin-bottom: 1.5rem;
     color: var(--text-color-headings);
+    position: relative;
+}
+
+h1::after {
+    content: '|';
+    position: absolute;
+    color: var(--primary-color);
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .hero-description {
@@ -206,30 +219,7 @@ h1 {
 }
 
 /* Typing animation styles */
-.typing-container {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 2rem;
-    min-height: 2.2rem;
-}
-
-#typing-text {
-    display: inline-block;
-}
-
-.typing-cursor {
-    display: inline-block;
-    opacity: 1;
-    animation: blink 0.7s infinite;
-    color: var(--primary-color);
-    font-weight: bold;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
+/* Removed the separate typing container styles */
 
 .cta-buttons {
     display: flex;

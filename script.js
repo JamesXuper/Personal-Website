@@ -27,23 +27,23 @@ function setupThemeSwitcher() {
 }
 
 /**
- * Text typing animation with simplified approach
+ * Text typing animation for the main heading
  */
 function setupTypingAnimation() {
     const typingElement = document.getElementById('typing-text');
     if (!typingElement) return;
 
     const titles = [
+        'James Xu',
         'Data Analyst',
         'Teacher',
-        'Python Enthusiast',
-        'Data Visualizer'
+        'Python Enthusiast'
     ];
     
     let currentTitleIndex = 0;
     let isDeleting = false;
-    let text = '';
-    let charIndex = 0;
+    let text = 'James Xu';
+    let charIndex = text.length;
     
     function tick() {
         const currentTitle = titles[currentTitleIndex];
@@ -61,7 +61,7 @@ function setupTypingAnimation() {
             // Remove a character
             text = currentTitle.substring(0, text.length - 1);
             typingElement.textContent = text;
-            setTimeout(tick, 50); // Faster deletion speed
+            setTimeout(tick, 80); // Deletion speed
         } else {
             // Add a character
             text = currentTitle.substring(0, charIndex + 1);
@@ -82,6 +82,9 @@ function setupTypingAnimation() {
         }
     }
     
-    // Start the animation
-    tick();
+    // Start with a pause before beginning the animation
+    setTimeout(() => {
+        isDeleting = true;
+        tick();
+    }, 3000);
 }
