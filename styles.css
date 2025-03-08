@@ -1,9 +1,8 @@
-/* CSS Variables for Light/Dark Theme */
 :root {
     /* Light Theme - Lakers Colors */
     --primary-color: #552583; /* Lakers Purple */
     --primary-color-hover: #4a1e77;
-    --secondary-color: #FDB927; /* Lakers Gold */
+    --secondary-color: #b27b00; /* Darker Lakers Gold for better contrast on white */
     --background-color: #ffffff;
     --card-background: #ffffff;
     --text-color: #333333;
@@ -16,14 +15,14 @@
     --social-bg: #F9F3FF; /* Very light purple */
     --project-image-bg: #edf2f7;
     --project-image-color: #a0aec0;
-    --accent-color: #FDB927; /* Lakers Gold as accent */
+    --accent-color: #b27b00; /* Darker Lakers Gold as accent */
 }
 
 [data-theme="dark"] {
     /* Dark Theme - Lakers Colors */
     --primary-color: #FDB927; /* Lakers Gold as primary in dark mode */
     --primary-color-hover: #ffca5a;
-    --secondary-color: #552583; /* Lakers Purple as secondary */
+    --secondary-color: #9c71d0; /* Lighter Lakers Purple for better readability */
     --background-color: #000000; /* Black background */
     --card-background: #111111;
     --text-color: #e6edf3;
@@ -36,7 +35,7 @@
     --social-bg: #2D2D2D; /* Dark gray */
     --project-image-bg: #2D2D2D;
     --project-image-color: #8b949e;
-    --accent-color: #552583; /* Lakers Purple as accent in dark mode */
+    --accent-color: #9c71d0; /* Lighter Lakers Purple as accent in dark mode */
 }
 
 /* Reset and base styles */
@@ -161,7 +160,14 @@ nav {
     color: var(--primary-color);
 }
 
-/* Custom cursor styles removed */
+[data-theme="dark"] .btn-secondary {
+    font-weight: 700;
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5); /* Add text shadow in dark mode */
+}
+
+[data-theme="dark"] .greeting {
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.7); /* Stronger shadow for purple in dark mode */
+}
 
 /* Hero Section */
 .hero {
@@ -192,8 +198,9 @@ nav {
 .greeting {
     font-size: 1.2rem;
     color: var(--secondary-color);
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 1rem;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
 }
 
 h1 {
@@ -216,7 +223,7 @@ h1 {
 h1::after {
     content: '|';
     display: inline-block;
-    color: var(--secondary-color);
+    color: var(--primary-color); /* Use primary color instead of secondary */
     animation: blink 0.7s infinite;
     margin-left: 2px;
 }
@@ -264,10 +271,11 @@ h1::after {
     border: 2px solid var(--secondary-color);
     color: var(--secondary-color);
     background-color: transparent;
+    font-weight: 700; /* Make text bolder for better contrast */
 }
 
 .btn-secondary:hover {
-    background-color: rgba(253, 185, 39, 0.1);
+    background-color: rgba(178, 123, 0, 0.1); /* Darker gold with transparency */
 }
 
 /* Featured Projects */
@@ -276,6 +284,14 @@ h1::after {
     background-color: var(--card-background);
     border-top: 4px solid var(--secondary-color);
     border-bottom: 4px solid var(--secondary-color);
+}
+
+/* Add box for the typing animation text to improve readability */
+#typing-text {
+    display: inline-block;
+    min-width: 12ch;
+    text-align: left;
+    position: relative;
 }
 
 .section-title {
@@ -346,7 +362,7 @@ h1::after {
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.8rem;
-    font-weight: 500;
+    font-weight: 700; /* Bolder text for better readability */
 }
 
 .project-link {
