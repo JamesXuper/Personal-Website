@@ -54,7 +54,7 @@ function setupTypingAnimation() {
         let typingSpeed;
         
         if (isPaused) {
-            typingSpeed = 1500; // Pause at complete title
+            typingSpeed = 3000; // Pause at complete title
             isPaused = false;
         } else if (isDeleting) {
             typingSpeed = 50; // Delete faster
