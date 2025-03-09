@@ -37,7 +37,8 @@ function setupTypingAnimation() {
     const titles = [
         'Data Analyst',
         'Teacher',
-        'Lifelong student'
+        'Student',
+        
     ];
     
     // Set initial conditions
