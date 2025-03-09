@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Theme switching functionality
     setupThemeSwitcher();
     
-    // Text typing animation
-    setupTypingAnimation();
+    // Modern typing animation
+    setupModernTypingAnimation();
 });
 
 /**
@@ -27,77 +27,91 @@ function setupThemeSwitcher() {
 }
 
 /**
- * Text typing animation for the main heading
+ * Modern text typing animation for the main heading
+ * Inspired by thanakon.com
  */
-function setupTypingAnimation() {
+function setupModernTypingAnimation() {
     const typingElement = document.getElementById('typing-text');
     if (!typingElement) return;
 
-    // Find the longest title to set consistent width
-    const titles = [
+    // Phrases to cycle through
+    const phrases = [
         'Data Analyst',
         'Teacher',
-        'Student',
-        
+        'Software Engineer',
+        'Student'
     ];
     
-    // Set initial conditions
-    let currentTitleIndex = 0;
+    let phraseIndex = 0;
+    let charIndex = 0;
     let isDeleting = false;
-    let text = 'James Xu';
+    let isWaiting = false;
     
-    // No need to set min-width for a more dynamic look
-    // The letter "A" will always be displayed before the typing text
+    // Variable typing speeds for more natural effect
+    const typingDelay = 150;
+    const erasingDelay = 80;
+    const newPhraseDelay = 2000; // Delay before starting to erase
+    const initialLoadDelay = 1000; // Initial delay before starting animation
     
-    function tick() {
-        const currentTitle = titles[currentTitleIndex];
-        
-        // Handle typing or deleting
-        if (isDeleting) {
-            // Remove a character
-            text = text.slice(0, -1);
-        } else {
-            // Add a character until we reach the full title
-            const nextChar = currentTitle.charAt(text.length);
-            if (text.length < currentTitle.length) {
-                text += nextChar;
-            }
-        }
-        
-        // Always display text content (no need for &nbsp; placeholder)
-        typingElement.textContent = text;
-        
-        // Determine next state and timing
-        let typingSpeed = 150;
-        
-        // If we've deleted everything
-        if (isDeleting && text.length === 0) {
-            isDeleting = false;
-            currentTitleIndex = (currentTitleIndex + 1) % titles.length;
-            typingSpeed = 500; // Pause briefly before typing next word
-        } 
-        // If we've typed the full word
-        else if (!isDeleting && text.length === currentTitle.length) {
-            // Pause at the full word
-            typingSpeed = 2000;
-            // Schedule deletion after pause
-            setTimeout(() => {
-                isDeleting = true;
-                tick();
-            }, typingSpeed);
-            return;
-        }
-        // Faster deletion speed
-        else if (isDeleting) {
-            typingSpeed = 80;
-        }
-        
-        setTimeout(tick, typingSpeed);
+    // Function to select random number within a range
+    // Makes typing look more natural with variable speeds
+    function getRandomSpeed(base, variance) {
+        return Math.floor(base + (Math.random() * variance - variance/2));
     }
     
-    // Start with a pause before beginning the animation
-    setTimeout(() => {
-        isDeleting = true;
-        tick();
-    }, 3000);
+    function type() {
+        const currentPhrase = phrases[phraseIndex];
+        
+        if (isWaiting) {
+            // Wait before starting to delete
+            isWaiting = false;
+            setTimeout(type, newPhraseDelay);
+            return;
+        }
+        
+        // Calculate the partial text to display
+        let partialText;
+        
+        if (isDeleting) {
+            // When deleting, remove characters
+            partialText = currentPhrase.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            // When typing, add characters
+            partialText = currentPhrase.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        // Update the text content
+        typingElement.textContent = partialText;
+        
+        // Calculate delay for next typing action
+        let typeSpeed;
+        
+        if (isDeleting) {
+            // Slightly randomize erasing speed
+            typeSpeed = getRandomSpeed(erasingDelay, 40);
+        } else {
+            // Randomize typing speed more significantly
+            typeSpeed = getRandomSpeed(typingDelay, 80);
+        }
+        
+        // Determine next step in animation
+        if (!isDeleting && charIndex === currentPhrase.length) {
+            // Finished typing the current phrase
+            isWaiting = true;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            // Finished deleting the current phrase
+            isDeleting = false;
+            // Move to next phrase
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+        
+        // Schedule next frame
+        setTimeout(type, typeSpeed);
+    }
+    
+    // Start the animation with a delay
+    setTimeout(type, initialLoadDelay);
 }
