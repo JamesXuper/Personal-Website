@@ -28,7 +28,6 @@ function setupThemeSwitcher() {
 
 /**
  * Modern text typing animation for the main heading
- * Inspired by thanakon.com
  */
 function setupModernTypingAnimation() {
     const typingElement = document.getElementById('typing-text');
@@ -38,8 +37,7 @@ function setupModernTypingAnimation() {
     const phrases = [
         'Data Analyst',
         'Teacher',
-        'Software Engineer',
-        'Student'
+        'Lifelong Student'
     ];
     
     let phraseIndex = 0;
