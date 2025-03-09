@@ -196,8 +196,8 @@ h1 {
     margin-bottom: 1.5rem;
     color: var(--text-color-headings);
     position: relative;
-    min-height: 4.2rem; /* Prevent vertical layout shift */
-    width: 100%; /* Full width container */
+    display: inline-flex;
+    align-items: center;
 }
 
 h1::after {
@@ -213,11 +213,9 @@ h1::after {
     50% { opacity: 0; }
 }
 
-/* Container for the typing text to prevent horizontal shifts */
 #typing-text {
     display: inline-block;
-    min-width: 12ch; /* Adjust based on your longest title */
-    text-align: left;
+    white-space: nowrap; /* Keep text on one line */
 }
 
 .hero-description {
@@ -490,6 +488,14 @@ footer {
 @media (max-width: 600px) {
     h1 {
         font-size: 2.5rem;
+        display: inline-flex;
+        flex-wrap: wrap;
+    }
+    
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
     }
     
     .nav-links {
