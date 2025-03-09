@@ -46,9 +46,8 @@ function setupTypingAnimation() {
     let isDeleting = false;
     let text = 'James Xu';
     
-    // Calculate minimum width based on longest title and set it
-    const longestTitle = titles.reduce((a, b) => a.length > b.length ? a : b);
-    typingElement.style.minWidth = longestTitle.length + 'ch';
+    // No need to set min-width for a more dynamic look
+    // The letter "A" will always be displayed before the typing text
     
     function tick() {
         const currentTitle = titles[currentTitleIndex];
@@ -65,12 +64,8 @@ function setupTypingAnimation() {
             }
         }
         
-        // Always keep content in the element to prevent layout shift
-        if (text.length === 0) {
-            typingElement.innerHTML = '&nbsp;';
-        } else {
-            typingElement.textContent = text;
-        }
+        // Always display text content (no need for &nbsp; placeholder)
+        typingElement.textContent = text;
         
         // Determine next state and timing
         let typingSpeed = 150;
