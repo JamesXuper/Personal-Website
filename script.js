@@ -31,7 +31,10 @@ function setupThemeSwitcher() {
  */
 function setupModernTypingAnimation() {
     const typingElement = document.getElementById('typing-text');
-    if (!typingElement) return;
+    if (!typingElement) {
+        console.error('Typing element not found!');
+        return;
+    }
 
     // Phrases to cycle through
     const phrases = [
@@ -46,6 +49,9 @@ function setupModernTypingAnimation() {
     let charIndex = 0;
     let isDeleting = false;
     let isWaiting = false;
+    
+    // Make sure the element is visible during animation
+    typingElement.style.visibility = 'visible';
     
     // Variable typing speeds for more natural effect
     const typingDelay = 150;
@@ -104,8 +110,9 @@ function setupModernTypingAnimation() {
         } else if (isDeleting && charIndex === 0) {
             // Finished deleting the current phrase
             isDeleting = false;
-            // Move to next phrase
+            // Move to next phrase - ensure we're cycling through all phrases
             phraseIndex = (phraseIndex + 1) % phrases.length;
+            console.log('Moving to phrase:', phrases[phraseIndex]); // Debug which phrase is next
         }
         
         // Schedule next frame

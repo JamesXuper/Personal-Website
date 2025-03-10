@@ -272,10 +272,14 @@ h1::after {
     color: var(--text-color-headings);
 }
 
+/* Updated Projects Grid for exactly 2 projects */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
     gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    justify-content: center;
 }
 
 .project-card {
@@ -482,6 +486,13 @@ footer {
     
     .theme-switch-wrapper {
         margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(1, minmax(280px, 1fr));
+        max-width: 400px;
     }
 }
 
