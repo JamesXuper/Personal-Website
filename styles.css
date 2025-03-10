@@ -378,8 +378,20 @@ h1::after {
 }
 
 .about-description {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: var(--text-color-secondary);
+}
+
+/* Added styling for the list in the About section */
+.about-text ul {
+    list-style-position: inside;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--text-color-secondary);
+}
+
+.about-text li {
+    margin-bottom: 0.5rem;
 }
 
 .skills {
