@@ -36,6 +36,8 @@ function setupModernTypingAnimation() {
     // Phrases to cycle through
     const phrases = [
         'Data Analyst',
+        'Engineer',
+        'Problem Solver',
         'Teacher',
         'Lifelong Student'
     ];
